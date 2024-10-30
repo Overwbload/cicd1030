@@ -7,7 +7,7 @@ phases:
   pre_build:
     commands:
     # 登入ECR
-      - aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 170973895532.dkr.ecr.ap-northeast-1.amazonaws.comaws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 034362066948.dkr.ecr.ap-northeast-1.amazonaws.com
+      - aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 034362066948.dkr.ecr.ap-northeast-1.amazonaws.com
   build:
     commands:
       - echo Build started on `date`
@@ -18,15 +18,15 @@ phases:
       - npm run build
       - echo npm run build completed on `date`
       # build鏡像
-      - docker build -t 034362066948.dkr.ecr.ap-northeast-1.amazonaws.com/ecr2-1029:latest1030 ./
+      - docker build -t  034362066948.dkr.ecr.ap-northeast-1.amazonaws.com/ecr1030:latest ./
       - echo docker build completed on `date`
       # 推送鏡像
-      - docker push 034362066948.dkr.ecr.ap-northeast-1.amazonaws.com/ecr2-1029:latest1030
+      - docker push 034362066948.dkr.ecr.ap-northeast-1.amazonaws.com/ecr1030:latest
       - echo docker push completed on `date`
   post_build:
     commands:
       - echo Build completed on `date`
-      - printf '[{"name:"mynginx","iamgeUrl":"%s"}]' 034362066948.dkr.ecr.ap-northeast-1.amazonaws.com/ecr2-1029:latest1030 > imagedefinitions.json
+      - printf '[{"name:"mynginx","iamgeUrl":"%s"}]' 034362066948.dkr.ecr.ap-northeast-1.amazonaws.com/ecr1030:latest > imagedefinitions.json
       - cat imagedefinitions.json
       # - ls -l ./dist/shop/
 artifacts:
