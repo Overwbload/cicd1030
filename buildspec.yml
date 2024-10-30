@@ -30,8 +30,9 @@ phases:
       - echo Build completed on `date`
       # 創建一個在源碼根目錄名為imagedefinitions.json的文件
       # 包含ECS Service的容器名，以及更新後要使用的image URI
-      # Codepipeline的部屬接端將使用此信息來創建ECS Service引用的task定義的新版本，然後他會使用新的TASK定義更新ECS Service
+      # Codepipeline的部屬階段將使用此信息來創建ECS Service引用的task定義的新版本，然後他會使用新的TASK定義更新ECS Service
       # %s會被替換成後面的部分
+      # name 指定要更新的container的名字，imageUri指定更新後的鏡像Uri
       - printf '[{"name":"mynginx","imageUri":"%s"}]' 034362066948.dkr.ecr.ap-northeast-1.amazonaws.com/ecr2-1029:$TAG > imagedefinitions.json
       - cat imagedefinitions.json
 
