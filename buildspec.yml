@@ -20,10 +20,10 @@ phases:
       # 獲取時間格式的標籤
       - TAG=$(date "+%Y%m%d%H%M%S")
       # build鏡像
-      - docker build -t  034362066948.dkr.ecr.ap-northeast-1.amazonaws.com/ecr1030:$TAG ./
+      - docker build -t  034362066948.dkr.ecr.ap-northeast-1.amazonaws.com/ecr2-1029:$TAG ./
       - echo docker build completed on `date`
       # 推送鏡像
-      - docker push 034362066948.dkr.ecr.ap-northeast-1.amazonaws.com/ecr1030:$TAG
+      - docker push 034362066948.dkr.ecr.ap-northeast-1.amazonaws.com/ecr2-1029:$TAG
       - echo docker push completed on `date`
   post_build:
     commands:
@@ -32,7 +32,7 @@ phases:
       # 包含ECS Service的容器名，以及更新後要使用的image URI
       # Codepipeline的部屬接端將使用此信息來創建ECS Service引用的task定義的新版本，然後他會使用新的TASK定義更新ECS Service
       # %s會被替換成後面的部分
-      - printf '[{"name:"container1030","iamgeUrl":"%s"}]' 034362066948.dkr.ecr.ap-northeast-1.amazonaws.com/ecr1030:$TAG > imagedefinitions.json
+      - printf '[{"name:"container1030","iamgeUrl":"%s"}]' 034362066948.dkr.ecr.ap-northeast-1.amazonaws.com/ecr2-1029:$TAG > imagedefinitions.json
       - cat imagedefinitions.json
       # - ls -l ./dist/shop/
 artifacts:
